@@ -80,7 +80,7 @@ lib/
 
 ## 🔗 Live Demo
 
-![Trailer](assets\screenshots\Trailer.mp4)
+![Trailer](assets/screenshots/Trailer.mp4)
 
 
 ---
