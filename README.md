@@ -55,15 +55,15 @@ lib/
 
 ## 📸 Screenshots
 
-![Home](assets\screenshots\home_page.png)
-![Search](assets\screenshots\discover_page.png)
-![Details](assets\screenshots\movie_details.png)
-![Details2](assets\screenshots\movie_details2.png)
-![Details3](assets\screenshots\movie_details3.png)
-![Details4](assets\screenshots\movie_details4.png)
-![Favorites](assets\screenshots\Favourite_page.png)
-![Actor Profile](assets\screenshots\actor_profile.png)
-![Actor Profile2](assets\screenshots\actor_profile2.png)
+![Home](assets/screenshots/home_page.png)
+![Search](assets/screenshots/discover_page.png)
+![Details](assets/screenshots/movie_details.png)
+![Details2](assets/screenshots/movie_details2.png)
+![Details3](assets/screenshots/movie_details3.png)
+![Details4](assets/screenshots/movie_details4.png)
+![Favorites](assets/screenshots/Favourite_page.png)
+![Actor Profile](assets/screenshots/actor_profile.png)
+![Actor Profile2](assets/screenshots/actor_profile2.png)
 
 ---
 
@@ -80,7 +80,7 @@ lib/
 
 ## 🔗 Live Demo
 
-![Trailer](assets\screenshots\Trailer.mp4)
+![Trailer](assets/screenshots/Trailer.mp4)
 
 
 ---
