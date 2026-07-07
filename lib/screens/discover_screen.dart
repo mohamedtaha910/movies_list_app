@@ -23,14 +23,17 @@ class DiscoverScreen extends StatelessWidget {
         title: Row(
           children: [
             IconButton(
+              padding: const EdgeInsets.all(0),
+              alignment: Alignment.centerLeft,
+
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
               icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 24,
+                Icons.arrow_back_ios_new_rounded,
+                size: 22,
                 // color: Colors.white,
                 color: kTextColor,
               ),
@@ -104,7 +107,7 @@ class DiscoverScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -112,7 +115,7 @@ class DiscoverScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         crossAxisSpacing: 14,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 3.2,
+                        childAspectRatio: 3.5,
                       ),
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
@@ -139,19 +142,22 @@ class DiscoverScreen extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else {
-            return GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 14,
-                mainAxisSpacing: 10,
-                childAspectRatio: 2.3,
+            return Padding(
+              padding: const EdgeInsets.only(top: 32, left: 8, right: 8),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 14,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 2.5,
+                ),
+                itemCount: 14,
+                itemBuilder: (context, index) {
+                  return MovieShimmer();
+                },
               ),
-              itemCount: 14,
-              itemBuilder: (context, index) {
-                return MovieShimmer();
-              },
             );
           }
         },

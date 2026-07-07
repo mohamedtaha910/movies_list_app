@@ -18,14 +18,24 @@ class SearchedMovieItem extends StatelessWidget {
       child: Container(
         // margin: const EdgeInsets.symmetric(vertical: 5.0),
         decoration: BoxDecoration(
-          color: Colors.white70.withAlpha(25),
+          // color: Colors.white70.withAlpha(25),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.grey.shade100.withAlpha(50),
+            width: 0.4,
+          ),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        // padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         margin: const EdgeInsets.symmetric(horizontal: 2.0),
         child: Row(
           children: [
-            MovieItem(movieImage: movie.poster, height: 130, width: 95),
+            MovieItem(
+              movieImage: movie.poster,
+              height: 150,
+              width: 110,
+              topRightRadius: 0,
+              bottomRightRadius: 0,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -36,37 +46,38 @@ class SearchedMovieItem extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Text(
-                  //   movie.overview,
-                  //   maxLines: 2,
-                  //   overflow: TextOverflow.ellipsis,
-                  //   style: const TextStyle(fontSize: 14, color: Colors.white70),
-                  // ),
+                  Text(
+                    movie.overview,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 14, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 8),
                   Container(
                     // margin: const EdgeInsets.all(5),
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(50),
                       color: Colors.white.withAlpha(25),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
-                          Icons.star_border_sharp,
-                          size: 18,
+                          Icons.star,
+                          size: 16,
                           color: Colors.orangeAccent,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           movie.rate.toString().substring(0, 3),
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 12,
                             // color: kTextColor,
                             color: Colors.orangeAccent,
                             fontWeight: FontWeight.bold,

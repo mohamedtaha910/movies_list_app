@@ -18,51 +18,52 @@ class HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         // automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        title: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-           
-            // const Text(
-            //   'Time ',
-            //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            // ),
-            // const Text(
-            //   'Movies',
-            //   style: TextStyle(
-            //     fontSize: 24,
-            //     fontWeight: FontWeight.bold,
-            //     color: Colors.orange,
-            //   ),
-            // ),
-            SvgPicture.asset('assets/Logo.svg' , height: 22,colorFilter:ColorFilter.mode(Color(0xfff53f3f).withAlpha(200), BlendMode.srcIn),),
-            const Spacer(),
-            Container(
-              margin: const EdgeInsets.only(top: 8),
-              height: 43,
-              width: 43,
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(20),
-                // color: kTextColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const DiscoverScreen(),
-                      ),
-                    );
-                  },
-                  icon:SvgPicture.asset('assets/Search.svg', colorFilter:ColorFilter.mode(kTextColor, BlendMode.srcIn),),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0.0),
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.asset(
+                'assets/Logo.svg',
+                height: 22,
+                colorFilter: ColorFilter.mode(
+                  Color(0xfff53f3f).withAlpha(200),
+                  BlendMode.srcIn,
                 ),
               ),
-            ),
-          ],
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DiscoverScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  // margin: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.all(8),
+                  // height: 43,
+                  // width: 43,
+                  decoration: BoxDecoration(
+                    // color: Colors.black.withAlpha(70),
+                    color: Colors.white.withAlpha(20),
+                    // color: kTextColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/Search.svg',
+                    colorFilter: ColorFilter.mode(kTextColor, BlendMode.srcIn),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
 
@@ -86,12 +87,13 @@ class HomePageBody extends StatelessWidget {
                     GridView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.7,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 18, //
-                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.7,
+                            mainAxisSpacing: 15,
+                            crossAxisSpacing: 18, //
+                          ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(

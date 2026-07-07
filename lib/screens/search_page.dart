@@ -32,12 +32,13 @@ class _SearchPageState extends State<SearchPage> {
         title: Row(
           children: [
             IconButton(
+              alignment: Alignment.centerLeft,
               onPressed: () {
                 Navigator.of(context).pop();
               },
               icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 24,
+                Icons.arrow_back_ios_new_rounded,
+                size: 22,
                 color: kTextColor,
               ),
             ),
@@ -111,7 +112,10 @@ class _SearchPageState extends State<SearchPage> {
                   return ListView.builder(
                     itemCount: 6,
                     itemBuilder: (context, index) {
-                      return const SearchedMovieShimmer();
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: const SearchedMovieShimmer(),
+                      );
                     },
                   );
                 }
