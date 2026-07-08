@@ -7,7 +7,7 @@ class HorizintalLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1,
+      height: 0.8,
       margin: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
       width: double.infinity,
       decoration: BoxDecoration(

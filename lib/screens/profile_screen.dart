@@ -16,8 +16,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-@override
+  @override
   void initState() {
     BlocProvider.of<FavCubit>(context).fetchAllFav();
     super.initState();
@@ -25,7 +24,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<FavCubit, FavState>(
       builder: (context, state) {
         BlocProvider.of<FavCubit>(context).fetchAllFav();
@@ -36,13 +34,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             surfaceTintColor: Colors.transparent,
             elevation: 0,
             title: const Text(
-              'Profile',
+              'Account',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 16,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text(
                               'Mohamed Taha',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: kTextColor,
                               ),
@@ -83,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    'Account',
+                    'General',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -99,8 +100,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // height: 200,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.white.withAlpha(23),
+                      color: Colors.white.withAlpha(15),
                       borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.grey.withAlpha(25),
+                        width: 0.8,
+                      ),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -108,6 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ProfileRow(
                           title: 'Favourite',
                           icon: Icons.bookmark,
+                          iconColor: Colors.pinkAccent,
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -119,24 +125,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         // const SizedBox(height: 8),
                         HorizintalLine(),
-        
+
                         ProfileRow(
                           title: 'Settings',
                           icon: Icons.settings,
+                          iconColor: Colors.indigo,
                           onTap: () {},
                         ),
-        
+
                         HorizintalLine(),
-        
+
                         ProfileRow(
                           title: 'About',
-                          icon: Icons.info_outline,
+                          icon: Icons.info,
+                          iconColor: Colors.brown,
                           onTap: () {},
                         ),
                       ],
                     ),
                   ),
-        
+
                   const SizedBox(height: 40),
                   Text(
                     'Personal',
@@ -155,8 +163,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // height: 200,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.white.withAlpha(23),
+                      // color: Colors.white.withAlpha(23),
                       borderRadius: BorderRadius.circular(12),
+                      color: Colors.white.withAlpha(15),
+                      border: Border.all(
+                        color: Colors.grey.withAlpha(25),
+                        width: 0.8,
+                      ),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -164,27 +177,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ProfileRow(
                           title: 'Change Password',
                           icon: Icons.lock,
+                          iconColor: Colors.blueGrey,
                           onTap: () {},
                         ),
                         // const SizedBox(height: 8),
                         HorizintalLine(),
-        
+
                         ProfileRow(
                           title: 'Logout',
                           icon: Icons.logout,
+                          iconColor: Colors.red,
                           onTap: () {},
                         ),
                       ],
                     ),
                   ),
-        
+
                   const SizedBox(height: 60),
                 ],
               ),
             ),
           ),
         );
-      }
+      },
     );
   }
 }

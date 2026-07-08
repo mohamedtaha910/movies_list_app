@@ -31,28 +31,40 @@ class CastView extends StatelessWidget {
               : SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: List.generate(
                       castList.length,
                       (index) => Container(
                         // height: 200,
-                        // width: 90,
+                        width: 110,
                         margin: const EdgeInsets.only(right: 12),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ActorProfileScreen(actorId: castList[index].id)));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ActorProfileScreen(
+                                  actorId: castList[index].id,
+                                ),
+                              ),
+                            );
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CircleAvatar(
-                                radius: 42,
-                                backgroundImage:
-                                    castList[index].profilePath.isEmpty
-                                    ? AssetImage('assets/person.jpg')
-                                    : NetworkImage(
-                                        'https://image.tmdb.org/t/p/w500${castList[index].profilePath}',
-                                      ),
+                                radius: 43,
+                                backgroundColor: Colors.grey.withAlpha(50),
+                                child: CircleAvatar(
+                                  radius: 42,
+
+                                  backgroundImage:
+                                      castList[index].profilePath.isEmpty
+                                      ? AssetImage('assets/person.jpg')
+                                      : NetworkImage(
+                                          'https://image.tmdb.org/t/p/w500${castList[index].profilePath}',
+                                        ),
+                                ),
                               ),
                               const SizedBox(height: 6),
                               Text(
@@ -60,17 +72,22 @@ class CastView extends StatelessWidget {
                                 //     ? '${castList[index].name.substring(0, 10)}...'
                                 //     :
                                 castList[index].name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: kTextColor,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                               Text(
                                 // castList[index].character.length >= 10
                                 //     ? '${castList[index].character.substring(0, 10)}...'
                                 //     :
-                                castList[index].character,
+                                '( ${castList[index].character} )',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 10,
                                   color: kTextColor,
