@@ -8,13 +8,17 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       // height: 10,
       // width: 10,
       // alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Colors.white70.withAlpha(25),
         borderRadius: BorderRadius.circular(12),
+        // border: Border.all(
+        //   color: Colors.grey.shade100.withAlpha(50),
+        //   width: 0.3,
+        // ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     HomePageBody(),
     // SearchPage(),
-    DiscoverScreen(),
+    DiscoverScreen(isBack: false),
     FavouritePage(isInProfile: false),
     ProfileScreen(),
   ];

@@ -41,7 +41,7 @@ class HomePageBody extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const DiscoverScreen(),
+                      builder: (context) => const DiscoverScreen(isBack: true,),
                     ),
                   );
                 },
@@ -118,6 +118,7 @@ class HomePageBody extends StatelessWidget {
             return NoConnectionBody();
           } else {
             return GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
               physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

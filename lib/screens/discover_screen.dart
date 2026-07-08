@@ -4,41 +4,38 @@ import 'package:movies_app/components/category_item.dart';
 import 'package:movies_app/constant.dart';
 import 'package:movies_app/models/category_model.dart';
 import 'package:movies_app/screens/category_screen.dart';
-import 'package:movies_app/screens/home_page.dart';
 import 'package:movies_app/screens/search_page.dart';
 import 'package:movies_app/services/movies_sevices.dart';
 import 'package:movies_app/shimmers/movie_shimmer.dart';
 
 class DiscoverScreen extends StatelessWidget {
-  const DiscoverScreen({super.key});
+  const DiscoverScreen({super.key, required this.isBack});
+  final bool isBack;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         backgroundColor: kPrimaryColor,
         surfaceTintColor: Colors.transparent,
         automaticallyImplyLeading: false,
         // leadingWidth: 0,
         title: Row(
           children: [
-            IconButton(
-              padding: const EdgeInsets.all(0),
-              alignment: Alignment.centerLeft,
-
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                size: 22,
-                // color: Colors.white,
-                color: kTextColor,
-              ),
-            ),
-            // const SizedBox(width: 5),
+            isBack
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: kTextColor,
+                      size: 22,
+                    ),
+                  )
+                : SizedBox.shrink(),
+            isBack ? const SizedBox(width: 10) : SizedBox.shrink(),
             Expanded(
               child: GestureDetector(
                 onTap: () {
@@ -47,7 +44,7 @@ class DiscoverScreen extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 0 , vertical: 50),
+                  // margin: EdgeInsets.symmetric(horizontal: 0, vertical: ),
                   padding: EdgeInsets.symmetric(horizontal: 18, vertical: 9),
                   decoration: BoxDecoration(
                     color: Colors.white70.withAlpha(25),
@@ -102,7 +99,7 @@ class DiscoverScreen extends StatelessWidget {
                     Text(
                       'Genres',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 22,
                         color: kTextColor,
                         fontWeight: FontWeight.bold,
                       ),
@@ -140,10 +137,19 @@ class DiscoverScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
+            return Center(
+              child: Text(
+                'There is an error , Try again later',
+                style: TextStyle(
+                  color: kTextColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
           } else {
             return Padding(
-              padding: const EdgeInsets.only(top: 32, left: 8, right: 8),
+              padding: const EdgeInsets.only(top: 60, left: 8, right: 8),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -151,9 +157,9 @@ class DiscoverScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 14,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 2.5,
+                  childAspectRatio: 2.6,
                 ),
-                itemCount: 14,
+                itemCount: 19,
                 itemBuilder: (context, index) {
                   return MovieShimmer();
                 },

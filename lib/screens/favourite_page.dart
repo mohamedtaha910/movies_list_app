@@ -11,8 +11,8 @@ import 'package:movies_app/models/movie_model.dart';
 // import 'package:movies_app/services/favourite_services.dart';
 
 class FavouritePage extends StatefulWidget {
-  const FavouritePage({super.key,required this.isInProfile});
-  final bool isInProfile ;
+  const FavouritePage({super.key, required this.isInProfile});
+  final bool isInProfile;
 
   @override
   State<FavouritePage> createState() => _FavouritePageState();
@@ -20,7 +20,7 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   bool isSorted = true;
- 
+
   @override
   initState() {
     BlocProvider.of<FavCubit>(context).fetchAllFav();
@@ -29,7 +29,6 @@ class _FavouritePageState extends State<FavouritePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -39,51 +38,75 @@ class _FavouritePageState extends State<FavouritePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            widget.isInProfile == true ? IconButton(
-              icon: Icon(Icons.arrow_back_ios_new),
-              onPressed: () {
-                Navigator.of(context).pop();
-                BlocProvider.of<FavCubit>(context).fetchAllFav();
-              },
-            ) : SizedBox(width: 0,),
-            // IconButton(
-            //   icon: Icon(Icons.arrow_back_ios_new),
-            //   onPressed: () {
-            //     Navigator.of(context).pushReplacement(
-            //       MaterialPageRoute(builder: (context) => HomePage()),
-            //     );
-            //   },
-            // ),
-            // Spacer(),
-            // SizedBox(width: 42),
+            widget.isInProfile == true
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withAlpha(25),
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: Colors.grey.shade100.withAlpha(50),
+                          width: 0.3,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 20,
+                        color: kTextColor,
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink(),
+            widget.isInProfile ? const SizedBox(width: 14) : SizedBox.shrink(),
             Text(
               'Favourites',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: kTextColor,
               ),
             ),
             Spacer(),
-            IconButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 setState(() {
-                  isSorted = !isSorted ;
+                  isSorted = !isSorted;
                 });
               },
-              icon: Icon(Icons.swap_vert_rounded, color: Colors.white),
-              padding: EdgeInsets.only(top: 12, bottom: 8),
+              child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white70.withAlpha(25),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Colors.grey.shade100.withAlpha(50),
+                    width: 0.3,
+                  ),
+                ),
+                child: Icon(
+                  Icons.swap_vert_rounded,
+                  size: 22,
+                  color: kTextColor,
+                ),
+              ),
             ),
           ],
         ),
       ),
-      
-      
+
       body: Padding(
-        padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8 , bottom: 0),
+        padding: const EdgeInsets.only(
+          right: 8.0,
+          left: 8.0,
+          top: 8,
+          bottom: 0,
+        ),
         child: BlocBuilder<FavCubit, FavState>(
           builder: (context, state) {
-
             List<MovieModel> favourites = BlocProvider.of<FavCubit>(
               context,
             ).movies;
@@ -101,12 +124,12 @@ class _FavouritePageState extends State<FavouritePage> {
                     ),
                   )
                 : SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: favourites.length,
                           itemBuilder: (context, index) {
@@ -114,15 +137,17 @@ class _FavouritePageState extends State<FavouritePage> {
                                 ? favourites[index]
                                 : reversedFavourites[index];
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                              ),
                               child: SearchedMovieItem(movie: movie),
                             );
                           },
                         ),
-                        SizedBox(height: 70,),
-                    ],
-                  ),
-                );
+                        SizedBox(height: 70),
+                      ],
+                    ),
+                  );
           },
         ),
       ),
