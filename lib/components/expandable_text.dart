@@ -26,11 +26,11 @@ class _ExpandableTextState extends State<ExpandableText> {
             widget.text,
             maxLines: isExpanded ? null : widget.trimLines,
             overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-          
+
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: kTextColor,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w300,
             ),
           ),
         ),

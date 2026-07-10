@@ -24,7 +24,7 @@ class ActorModel {
       biography: json['biography'] ?? '',
       birthday: json['birthday'] ?? '',
       placeOfBirth: json['place_of_birth'],
-      profilePath: json['profile_path'],
+      profilePath: json['profile_path'] ?? '',
       popularity: (json['popularity'] as num).toDouble(),
     );
   }

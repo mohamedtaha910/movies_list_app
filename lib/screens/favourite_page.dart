@@ -44,9 +44,9 @@ class _FavouritePageState extends State<FavouritePage> {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      padding: EdgeInsets.all(6),
+                      padding: EdgeInsets.all(0.8),
                       decoration: BoxDecoration(
-                        color: Colors.black.withAlpha(25),
+                        color: Colors.white.withAlpha(25),
                         borderRadius: BorderRadius.circular(50),
                         border: Border.all(
                           color: Colors.grey.shade100.withAlpha(50),
@@ -54,8 +54,8 @@ class _FavouritePageState extends State<FavouritePage> {
                         ),
                       ),
                       child: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 20,
+                        Icons.chevron_left_rounded,
+                        size: 32,
                         color: kTextColor,
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/components/expandable_text.dart';
 import 'package:movies_app/components/movie_item.dart';
@@ -31,34 +32,30 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor: kPrimaryColor,
-        surfaceTintColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        title: Row(
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                color: kTextColor,
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            const Text(
-              '',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: kPrimaryColor,
+      //   surfaceTintColor: Colors.transparent,
+      //   automaticallyImplyLeading: false,
+      //   elevation: 0,
+      //   title: Row(
+      //     children: [
+      //       IconButton(
+      //         icon: const Icon(Icons.arrow_back_ios_new, color: kTextColor),
+      //         onPressed: () {
+      //           Navigator.of(context).pop();
+      //         },
+      //       ),
+      //       const Text(
+      //         '',
+      //         style: TextStyle(
+      //           fontSize: 20,
+      //           fontWeight: FontWeight.bold,
+      //           color: Colors.white,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: FutureBuilder<ActorModel>(
         future: actorFuture,
         builder: (context, snapshot) {
@@ -68,249 +65,272 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
 
           final actor = snapshot.data!;
 
-          return SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 8.0,
-                //     vertical: 5.0,
-                //   ),
-                //   child: IconButton(
-                //     padding: EdgeInsets.zero,
-                //     onPressed: () {
-                //       Navigator.of(context).pop();
-                //     },
-                //     icon: Icon(Icons.arrow_back_ios_new, color: kTextColor),
-                //   ),
-                // ),
-                // SizedBox(height: 23,),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(14),
-                        child: Image.network(
-                          'https://image.tmdb.org/t/p/w500${actor.profilePath}',
-                          height: 375,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
+          return SafeArea(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     horizontal: 8.0,
+                  //     vertical: 5.0,
+                  //   ),
+                  //   child: IconButton(
+                  //     padding: EdgeInsets.zero,
+                  //     onPressed: () {
+                  //       Navigator.of(context).pop();
+                  //     },
+                  //     icon: Icon(Icons.arrow_back_ios_new, color: kTextColor),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 23,),
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          // borderRadius: BorderRadiusGeometry.circular(14),
+                          child: actor.profilePath == ''
+                              ? Image.asset('assets/person.jpg')
+                              : Image.network(
+                                  'https://image.tmdb.org/t/p/w500${actor.profilePath}',
+                                  // height: 500,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 20,
-                        left: 16,
-                        child: Text(
-                          actor.name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            // color: kIconsColor,
-                            fontSize: 28,
+
+                        Positioned.fill(
+                          // bottom: 0,
+                          // left: 0,
+                          // right: 0,
+                          // height: 140,
+                          // height: 250,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              // borderRadius: BorderRadius.circular(14),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  kPrimaryColor.withAlpha(120),
+                                  kPrimaryColor,
+                                  // Colors.black,
+                                  // Colors.black.withAlpha(210),
+
+                                  // kPrimaryColor.withAlpha(250),
+
+                                  // Colors.yellow
+                                ],
+                                stops: const [0.0, 0.45, 0.7, 1.0],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 20,
+                          left: 16,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                actor.name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  // color: kIconsColor,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.place_rounded,
+                                    size: 22,
+                                    color: Colors.white38,
+                                  ),
+                                  SizedBox(width: 10),
+                                  SizedBox(
+                                    width: 280,
+                                    child: Text(
+                                      actor.placeOfBirth == '' ||
+                                              actor.placeOfBirth == null
+                                          ? 'Not available !'
+                                          : actor.placeOfBirth.toString(),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white38,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: 16,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withAlpha(100),
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: Colors.white.withAlpha(25),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.chevron_left_rounded,
+                                size: 28,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _StatCard(
+                                icon: Icons.cake_rounded,
+                                label: 'Birthday',
+                                value:
+                                    (actor.birthday == '' ||
+                                        actor.birthday == null)
+                                    ? '—'
+                                    : actor.birthday.toString(),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _StatCard(
+                                icon: Icons.hourglass_bottom_rounded,
+                                label: 'Age',
+                                value: actor.birthday == null
+                                    ? '—'
+                                    : '${Helper.calculateAge(actor.birthday)} yrs',
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        const Text(
+                          "Biograph",
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: kTextColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
+                        const SizedBox(height: 12),
+                        actor.biography.isEmpty
+                            ? const Text(
+                                "No biography available.",
+                                style: TextStyle(
+                                  color: kTextColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                ),
+                              )
+                            : actor.biography.length < 300
+                            ? Text(
+                                actor.biography,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                              )
+                            : ExpandableText(
+                                text: actor.biography,
 
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: 140,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.center,
-                              colors: [
-                                // Colors.black,
-                                Colors.black.withAlpha(210),
-                                // kPrimaryColor,
-                                // kPrimaryColor.withAlpha(250),
-                                // kPrimaryColor.withAlpha(25),
-                                Colors.transparent,
-                                // Colors.yellow
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // const SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Birthday : ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            actor.birthday == '' || actor.birthday == null ? 'Not available !' : 
-                            actor.birthday.toString(),
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kTextColor,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          
-                        ],
-                      ),
-                      SizedBox(height: 8),
-
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-
-                        children: [
-                          Text(
-                            "Age : ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: Text(
-                              '${Helper.calculateAge(actor.birthday)} years old', style: TextStyle(
-                              fontSize: 16,
-                              color: kTextColor,
-                              fontWeight: FontWeight.w400,
-                            ), ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-
-                        children: [
-                          Text(
-                            "Place : ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 280,
-                            child: Text(
-                              actor.placeOfBirth == '' || actor.placeOfBirth == null ? 'Not available !' : 
-                              actor.placeOfBirth.toString(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: kTextColor,
-                                fontWeight: FontWeight.w400,
+                                trimLines: 6,
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      const Text(
-                        "Biograph",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: kTextColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      actor.biography.isEmpty
-                          ? const Text(
-                              "No biography available.",
-                              style: TextStyle(
-                                color: kTextColor,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
-                            )
-                          : actor.biography.length < 300
-                          ? Text(
-                              actor.biography,
-                              style: TextStyle(
-                                color: kTextColor,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
-                            )
-                          : ExpandableText(text: actor.biography, trimLines: 6),
-                    ],
-                  ),
-                ),
-
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Text(
-                    "Movies",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: kTextColor,
+                      ],
                     ),
                   ),
-                ),
 
-                SizedBox(
-                  height: 220,
-                  child: FutureBuilder<List<MovieModel>>(
-                    future: moviesFuture,
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final movies = snapshot.data!;
-                      return ListView.builder(
-                        
-                        scrollDirection: Axis.horizontal,
-                        itemCount: movies.length,
-                        
-                        itemBuilder: (context, index) {
-                          final movie = movies[index];
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    child: Text(
+                      "Movies",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: kTextColor,
+                      ),
+                    ),
+                  ),
 
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        MovieDetails(id: movie.id),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: SizedBox(
+                      height: 200,
+                      child: FutureBuilder<List<MovieModel>>(
+                        future: moviesFuture,
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          final movies = snapshot.data!;
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: movies.length,
+
+                            itemBuilder: (context, index) {
+                              final movie = movies[index];
+
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MovieDetails(id: movie.id),
+                                      ),
+                                    );
+                                  },
+                                  child: MovieItem(
+                                    movieImage: movie.poster,
+                                    height: 150,
+                                    width: 118,
                                   ),
-                                );
-                              },
-                              child: MovieItem(
-                                movieImage: movie.poster,
-                                height: 150,
-                                width: 118,
-                              ),
-                            ),
+                                ),
+                              );
+                            },
                           );
                         },
-                      );
-                    },
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -319,14 +339,15 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
   }
 }
 
-// ==========================================================
-
-// screen 2 
+// ===============================
 // import 'package:flutter/material.dart';
+// import 'package:movies_app/components/expandable_text.dart';
 // import 'package:movies_app/components/movie_item.dart';
 // import 'package:movies_app/constant.dart';
+// import 'package:movies_app/helper/claculate_age.dart';
 // import 'package:movies_app/models/actor_model.dart';
 // import 'package:movies_app/models/movie_model.dart';
+// import 'package:movies_app/screens/movie_details_page.dart';
 // import 'package:movies_app/services/movies_sevices.dart';
 
 // class ActorProfileScreen extends StatefulWidget {
@@ -342,6 +363,8 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
 //   late Future<ActorModel> actorFuture;
 //   late Future<List<MovieModel>> moviesFuture;
 
+//   static const double _expandedHeight = 460;
+
 //   @override
 //   void initState() {
 //     super.initState();
@@ -352,168 +375,416 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
+//       backgroundColor: kPrimaryColor,
 //       body: FutureBuilder<ActorModel>(
 //         future: actorFuture,
 //         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return const Center(
+//               child: CircularProgressIndicator(color: kIconsColor),
+//             );
+//           }
+
 //           if (!snapshot.hasData) {
-//             return const Center(child: CircularProgressIndicator());
+//             return Center(
+//               child: Text(
+//                 'Something went wrong',
+//                 style: TextStyle(color: kTextColor),
+//               ),
+//             );
 //           }
 
 //           final actor = snapshot.data!;
 
 //           return CustomScrollView(
+//             physics: const BouncingScrollPhysics(),
 //             slivers: [
 //               SliverAppBar(
-//                 expandedHeight: 450,
 //                 pinned: true,
-//                 backgroundColor: Colors.black,
-//                 flexibleSpace: FlexibleSpaceBar(
-//                   title: Text(
-//                     actor.name,
-//                     style: const TextStyle(fontWeight: FontWeight.bold),
+//                 stretch: true,
+//                 backgroundColor: kPrimaryColor,
+//                 surfaceTintColor: Colors.transparent,
+//                 expandedHeight: _expandedHeight,
+//                 automaticallyImplyLeading: false,
+//                 leading: Padding(
+//                   padding: const EdgeInsets.only(left: 12, top: 4),
+//                   child: _CircleIconButton(
+//                     icon: Icons.chevron_left_rounded,
+//                     onTap: () => Navigator.of(context).pop(),
 //                   ),
+//                 ),
+//                 flexibleSpace: FlexibleSpaceBar(
+//                   stretchModes: const [
+//                     StretchMode.zoomBackground,
+//                     StretchMode.fadeTitle,
+//                   ],
+
 //                   background: Stack(
 //                     fit: StackFit.expand,
 //                     children: [
-//                       Image.network(
-//                         'https://image.tmdb.org/t/p/w500${actor.profilePath}',
-//                         fit: BoxFit.cover,
+//                       Hero(
+//                         tag: 'actor_${widget.actorId}',
+//                         child: actor.profilePath == ''
+//                             ? Image.asset(
+//                                 'assets/person.jpg',
+//                                 fit: BoxFit.cover,
+//                               )
+//                             : Image.network(
+//                                 'https://image.tmdb.org/t/p/w500${actor.profilePath}',
+//                                 fit: BoxFit.cover,
+//                               ),
 //                       ),
-
-//                       Container(
-//                         decoration: const BoxDecoration(
-//                           gradient: LinearGradient(
-//                             begin: Alignment.bottomCenter,
-//                             end: Alignment.center,
-//                             colors: [
-//                               // Colors.red,
-//                               Colors.black,
-//                               Colors.transparent,
-//                               // Colors.yellow
-//                             ],
+//                       // Bottom fade so the name sits on a legible surface.
+//                       Positioned.fill(
+//                         child: DecoratedBox(
+//                           decoration: BoxDecoration(
+//                             gradient: LinearGradient(
+//                               begin: Alignment.topCenter,
+//                               end: Alignment.bottomCenter,
+//                               colors: [
+//                                 Colors.transparent,
+//                                 Colors.transparent,
+//                                 kPrimaryColor.withAlpha(140),
+//                                 kPrimaryColor,
+//                               ],
+//                               stops: const [0.0, 0.45, 0.75, 1.0],
+//                             ),
 //                           ),
 //                         ),
 //                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-
-//               SliverToBoxAdapter(
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(16),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Row(
-//                         children: [
-//                           const Icon(Icons.cake, color: kTextColor),
-//                           const SizedBox(width: 6),
-//                           Text(
-//                             actor.birthday ?? "Unknown",
-//                             style: const TextStyle(
-//                               color: kTextColor,
-//                               fontWeight: FontWeight.w400,
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-
-//                       const SizedBox(height: 6),
-
-//                       Row(
-//                         children: [
-//                           const Icon(Icons.location_on, color: kTextColor),
-//                           const SizedBox(width: 6),
-//                           Expanded(
-//                             child: Text(
-//                               actor.placeOfBirth ?? "Unknown",
+//                       Positioned(
+//                         left: 20,
+//                         right: 20,
+//                         bottom: 22,
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text(
+//                               actor.name,
 //                               style: const TextStyle(
-//                                 color: kTextColor,
-//                                 fontWeight: FontWeight.w400,
+//                                 color: Colors.white,
+//                                 fontSize: 30,
+//                                 fontWeight: FontWeight.bold,
+//                                 height: 1.1,
+//                                 shadows: [
+//                                   Shadow(color: Colors.black54, blurRadius: 12),
+//                                 ],
 //                               ),
 //                             ),
-//                           ),
-//                         ],
-//                       ),
-
-//                       const SizedBox(height: 20),
-
-//                       const Text(
-//                         "Biography",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           color: kTextColor,
-//                           fontWeight: FontWeight.bold,
+//                             if (actor.placeOfBirth != null &&
+//                                 actor.placeOfBirth != '')
+//                               Padding(
+//                                 padding: const EdgeInsets.only(top: 6),
+//                                 child: Row(
+//                                   mainAxisSize: MainAxisSize.min,
+//                                   children: [
+//                                     const Icon(
+//                                       Icons.place_rounded,
+//                                       size: 15,
+//                                       color: Colors.white70,
+//                                     ),
+//                                     const SizedBox(width: 4),
+//                                     Flexible(
+//                                       child: Text(
+//                                         actor.placeOfBirth.toString(),
+//                                         maxLines: 1,
+//                                         overflow: TextOverflow.ellipsis,
+//                                         style: const TextStyle(
+//                                           color: Colors.white70,
+//                                           fontSize: 13,
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ),
+//                           ],
 //                         ),
 //                       ),
-
-//                       const SizedBox(height: 10),
-
-//                       Text(
-//                         actor.biography.isEmpty
-//                             ? "No biography available."
-//                             : actor.biography,
-//                         style: const TextStyle(
-//                           height: 1.5,
-//                           color: kTextColor,
-//                           fontWeight: FontWeight.w400,
-//                         ),
-//                       ),
-
-//                       const SizedBox(height: 30),
-
-//                       const Text(
-//                         "Movies ",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           color: kTextColor,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-
-//                       const SizedBox(height: 10),
 //                     ],
 //                   ),
 //                 ),
 //               ),
 
-              
 //               SliverToBoxAdapter(
-//                 child: SizedBox(
-//                   height: 220,
-//                   child: FutureBuilder<List<MovieModel>>(
-//                     future: moviesFuture,
-//                     builder: (context, snapshot) {
-//                       if (!snapshot.hasData) {
-//                         return const Center(child: CircularProgressIndicator());
-//                       }
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     const SizedBox(height: 18),
 
-//                       final movies = snapshot.data!;
-
-//                       return ListView.builder(
-//                         scrollDirection: Axis.horizontal,
-//                         itemCount: movies.length,
-//                         itemBuilder: (context, index) {
-//                           final movie = movies[index];
-
-//                           return Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: MovieItem(
-//                               movieImage: movie.poster,
-//                               height: 150,
-//                               width: 118,
+//                     // Stat chips row: Birthday / Age.
+//                     Padding(
+//                       padding: const EdgeInsets.symmetric(horizontal: 16),
+//                       child: Row(
+//                         children: [
+//                           Expanded(
+//                             child: _StatCard(
+//                               icon: Icons.cake_rounded,
+//                               label: 'Birthday',
+//                               value:
+//                                   (actor.birthday == '' ||
+//                                       actor.birthday == null)
+//                                   ? '—'
+//                                   : actor.birthday.toString(),
 //                             ),
+//                           ),
+//                           const SizedBox(width: 12),
+//                           Expanded(
+//                             child: _StatCard(
+//                               icon: Icons.hourglass_bottom_rounded,
+//                               label: 'Age',
+//                               value: actor.birthday == null
+//                                   ? '—'
+//                                   : '${Helper.calculateAge(actor.birthday)} yrs',
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+
+//                     const SizedBox(height: 24),
+
+//                     Padding(
+//                       padding: const EdgeInsets.symmetric(horizontal: 16),
+//                       child: Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           const _SectionTitle(title: 'Biography'),
+//                           const SizedBox(height: 10),
+//                           actor.biography.isEmpty
+//                               ? Text(
+//                                   'No biography available.',
+//                                   style: TextStyle(
+//                                     color: kTextColor.withAlpha(180),
+//                                     fontWeight: FontWeight.w400,
+//                                     fontSize: 14,
+//                                     height: 1.5,
+//                                   ),
+//                                 )
+//                               : actor.biography.length < 300
+//                               ? Text(
+//                                   actor.biography,
+//                                   style: TextStyle(
+//                                     color: kTextColor.withAlpha(220),
+//                                     fontWeight: FontWeight.w400,
+//                                     fontSize: 14,
+//                                     height: 1.5,
+//                                   ),
+//                                 )
+//                               : ExpandableText(
+//                                   text: actor.biography,
+//                                   trimLines: 6,
+//                                 ),
+//                         ],
+//                       ),
+//                     ),
+
+//                     const SizedBox(height: 26),
+
+//                     Padding(
+//                       padding: const EdgeInsets.symmetric(horizontal: 16),
+//                       child: const _SectionTitle(title: 'Known For'),
+//                     ),
+//                     const SizedBox(height: 14),
+
+//                     SizedBox(
+//                       height: 210,
+//                       child: FutureBuilder<List<MovieModel>>(
+//                         future: moviesFuture,
+//                         builder: (context, snapshot) {
+//                           if (snapshot.connectionState ==
+//                               ConnectionState.waiting) {
+//                             return const Center(
+//                               child: CircularProgressIndicator(
+//                                 color: kIconsColor,
+//                               ),
+//                             );
+//                           }
+
+//                           final movies = snapshot.data ?? [];
+
+//                           if (movies.isEmpty) {
+//                             return Center(
+//                               child: Text(
+//                                 'No movies found',
+//                                 style: TextStyle(
+//                                   color: kTextColor.withAlpha(150),
+//                                 ),
+//                               ),
+//                             );
+//                           }
+
+//                           return ListView.builder(
+//                             padding: const EdgeInsets.symmetric(horizontal: 16),
+//                             scrollDirection: Axis.horizontal,
+//                             itemCount: movies.length,
+//                             itemBuilder: (context, index) {
+//                               final movie = movies[index];
+
+//                               return Padding(
+//                                 padding: const EdgeInsets.only(right: 12),
+//                                 child: GestureDetector(
+//                                   onTap: () {
+//                                     Navigator.of(context).push(
+//                                       MaterialPageRoute(
+//                                         builder: (context) =>
+//                                             MovieDetails(id: movie.id),
+//                                       ),
+//                                     );
+//                                   },
+//                                   child: ClipRRect(
+//                                     borderRadius: BorderRadius.circular(14),
+//                                     child: Container(
+//                                       decoration: BoxDecoration(
+//                                         borderRadius: BorderRadius.circular(14),
+//                                         boxShadow: [
+//                                           BoxShadow(
+//                                             color: Colors.black.withAlpha(60),
+//                                             blurRadius: 10,
+//                                             offset: const Offset(0, 4),
+//                                           ),
+//                                         ],
+//                                       ),
+//                                       child: MovieItem(
+//                                         movieImage: movie.poster,
+//                                         height: 100,
+//                                         width: 120,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               );
+//                             },
 //                           );
 //                         },
-//                       );
-//                     },
-//                   ),
+//                       ),
+//                     ),
+
+//                     const SizedBox(height: 32),
+//                   ],
 //                 ),
 //               ),
 //             ],
 //           );
 //         },
+//       ),
+//     );
+//   }
+// }
+
+// class _SectionTitle extends StatelessWidget {
+//   final String title;
+
+//   const _SectionTitle({required this.title});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Container(
+//           width: 4,
+//           height: 18,
+//           decoration: BoxDecoration(
+//             color: kIconsColor,
+//             borderRadius: BorderRadius.circular(4),
+//           ),
+//         ),
+//         const SizedBox(width: 8),
+//         Text(
+//           title,
+//           style: const TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: kTextColor,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+class _StatCard extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _StatCard({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha(15),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withAlpha(20)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              // color: kIconsColor.withAlpha(40),
+              color: Colors.black.withAlpha(25),
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.grey.withAlpha(25)),
+            ),
+            child: Icon(icon, size: 18, color: kIconsColor),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: kTextColor.withAlpha(150),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: kTextColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// class _CircleIconButton extends StatelessWidget {
+//   final IconData icon;
+//   final VoidCallback onTap;
+
+//   const _CircleIconButton({required this.icon, required this.onTap});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Container(
+//         padding: const EdgeInsets.all(6),
+//         decoration: BoxDecoration(
+//           color: Colors.black.withAlpha(90),
+//           shape: BoxShape.circle,
+//           border: Border.all(color: Colors.white.withAlpha(40)),
+//         ),
+//         child: Icon(icon, size: 26, color: Colors.white),
 //       ),
 //     );
 //   }

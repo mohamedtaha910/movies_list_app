@@ -21,7 +21,7 @@ class SimiliarMoviesView extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0.0),
                     child: const Text(
-                      'The similar movies is not available !',
+                      'There is No Similar movies !',
                       style: TextStyle(
                         fontSize: 14,
                         color: kTextColor,
@@ -59,8 +59,7 @@ class SimiliarMoviesView extends StatelessWidget {
                             Text(
                               similiarMovies[index].title.length >= 13
                                   ? ' ${similiarMovies[index].title.substring(0, 13)}...'
-                                  : similiarMovies[index]
-                                        .title, //
+                                  : similiarMovies[index].title, //
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,

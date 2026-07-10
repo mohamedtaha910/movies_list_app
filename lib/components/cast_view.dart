@@ -85,9 +85,12 @@ class CastView extends StatelessWidget {
                                 // castList[index].character.length >= 10
                                 //     ? '${castList[index].character.substring(0, 10)}...'
                                 //     :
-                                '( ${castList[index].character} )',
+                                castList[index].character == ''
+                                    ? '( Unknown )'
+                                    : '( ${castList[index].character} )',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 10,
                                   color: kTextColor,
