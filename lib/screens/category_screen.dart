@@ -24,19 +24,30 @@ class CategoryScreen extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               child: Container(
-                padding: const EdgeInsets.all(6),
+                padding: EdgeInsets.all(0.8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(25),
+                  // color: Colors.white.withAlpha(25),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withAlpha(50),
+                      // Colors.white.withAlpha(20),
+                      Colors.white.withAlpha(10),
+                    ],
+                    begin: AlignmentGeometry.topCenter,
+                    end: AlignmentGeometry.bottomCenter,
+                  ),
                   borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                    color: Colors.grey.shade100.withAlpha(50),
-                    width: 0.3,
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.grey.shade100.withAlpha(50),
+                      width: 0.4,
+                    ),
                   ),
                 ),
                 child: Icon(
-                  Icons.arrow_back_ios_new_rounded,
+                  Icons.chevron_left_rounded,
+                  size: 32,
                   color: kTextColor,
-                  size: 20,
                 ),
               ),
             ),

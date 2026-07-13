@@ -19,7 +19,9 @@ class TrailerButton extends StatelessWidget {
           // color: kTextColor.withAlpha(50),
           color: Colors.blueGrey,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.grey.withAlpha(25)),
+          border: Border(
+            top: BorderSide(color: Colors.white.withAlpha(90), width: 0.7),
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

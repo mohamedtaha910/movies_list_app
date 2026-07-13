@@ -41,7 +41,7 @@ class HomePageBody extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const DiscoverScreen(isBack: true,),
+                      builder: (context) => const DiscoverScreen(isBack: true),
                     ),
                   );
                 },
@@ -52,9 +52,23 @@ class HomePageBody extends StatelessWidget {
                   // width: 43,
                   decoration: BoxDecoration(
                     // color: Colors.black.withAlpha(70),
-                    color: Colors.white.withAlpha(20),
-                    // color: kTextColor,
+                    // color: Colors.white.withAlpha(20),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withAlpha(50),
+                        Colors.white.withAlpha(30),
+                        Colors.white.withAlpha(10),
+                      ],
+                      begin: AlignmentGeometry.topCenter,
+                      end: AlignmentGeometry.bottomCenter,
+                    ),
                     borderRadius: BorderRadius.circular(12),
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.white.withAlpha(50),
+                        width: 0.6,
+                      ),
+                    ),
                   ),
                   child: SvgPicture.asset(
                     'assets/Search.svg',

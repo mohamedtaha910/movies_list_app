@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/constant.dart';
@@ -39,27 +41,33 @@ class _HomePageState extends State<HomePage> {
         children: [
           pages[currentIndex],
 
+          // shadow
           Positioned(
             // top: 100,
             bottom: 0,
             left: 0,
             right: 0,
-            // height: 55,
-            // height: 65,
+
             child: Container(
-              height: 100,
+              height: 85,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [kPrimaryColor, kPrimaryColor.withAlpha(10)],
+                  // colors: [Colors.red, Colors.yellow],
+                  colors: [
+                    kPrimaryColor,
+                    // kPrimaryColor.withAlpha(25),
+                    kPrimaryColor.withAlpha(0),
+                  ],
                 ),
               ),
             ),
           ),
 
+          // nav bar
           Positioned(
-            bottom: 8, // => windows
+            bottom: 8,
             left: 6,
             right: 6,
             child: SafeArea(
@@ -67,98 +75,240 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: NavigationBar(
-                    labelPadding: const EdgeInsets.all(0),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.blueGrey.withOpacity(0.28),
+                            Colors.blueGrey.withOpacity(0.2),
+                            Colors.blueGrey.withOpacity(0.28),
 
-                    height: 56, // => windows
-                    labelBehavior:
-                        NavigationDestinationLabelBehavior.alwaysHide,
-                    animationDuration: Duration(milliseconds: 400),
-                    // indicatorColor: Colors.white.withAlpha(23),
-                    indicatorColor: const Color.fromARGB(255, 32, 42, 56),
-                    backgroundColor: const Color.fromARGB(255, 36, 52, 73),
-                    onDestinationSelected: (index) {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
-                    selectedIndex: currentIndex,
-                    destinations: [
-                      NavigationDestination(
-                        // icon: Icon(Icons.home_outlined , ),
-                        icon: SvgPicture.asset(
-                          'assets/Home.svg',
-                          colorFilter: ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
+                            // Colors.blueGrey.withOpacity(0.58),
+                            // Colors.blueGrey.withOpacity(0.4),
+                            // Colors.blueGrey.withOpacity(0.58),
+                          ],
+                        ),
+                        border: Border(
+                          top: BorderSide(
+                            color: Colors.white.withOpacity(0.20),
+                            width: 1,
                           ),
                         ),
-                        selectedIcon: SvgPicture.asset(
-                          'assets/home_selected.svg',
-                          colorFilter: ColorFilter.mode(
-                            kIconsColor,
-                            BlendMode.srcIn,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
                           ),
-                        ),
-                        label: 'Home',
+                        ],
                       ),
-                      NavigationDestination(
-                        icon: SvgPicture.asset(
-                          'assets/Search.svg',
-                          colorFilter: ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
+                      child: NavigationBarTheme(
+                        data: NavigationBarThemeData(
+                          indicatorColor: Colors.white.withOpacity(0.15),
+
+                          // indicatorShape: RoundedRectangleBorder(
+                          //   borderRadius: BorderRadiusGeometry.circular(100),
+                          // ),
                         ),
-                        selectedIcon: SvgPicture.asset(
-                          'assets/Search.svg',
-                          colorFilter: ColorFilter.mode(
-                            kIconsColor,
-                            BlendMode.srcIn,
-                          ),
+                        child: NavigationBar(
+                          labelPadding: const EdgeInsets.all(0),
+                          height: 60,
+                          labelBehavior:
+                              NavigationDestinationLabelBehavior.alwaysHide,
+                          animationDuration: const Duration(milliseconds: 400),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          onDestinationSelected: (index) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
+                          selectedIndex: currentIndex,
+                          destinations: [
+                            NavigationDestination(
+                              icon: SvgPicture.asset(
+                                'assets/Home.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.7),
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              selectedIcon: SvgPicture.asset(
+                                'assets/home_selected.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              label: 'Home',
+                            ),
+                            NavigationDestination(
+                              icon: SvgPicture.asset(
+                                'assets/Search.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.7),
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              selectedIcon: SvgPicture.asset(
+                                'assets/Search.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              label: 'Search',
+                            ),
+                            NavigationDestination(
+                              icon: SvgPicture.asset(
+                                'assets/Bookmark.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.7),
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              selectedIcon: SvgPicture.asset(
+                                'assets/Bookmark.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              label: 'Favourites',
+                            ),
+                            NavigationDestination(
+                              icon: SvgPicture.asset(
+                                'assets/Profile.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.7),
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              selectedIcon: SvgPicture.asset(
+                                'assets/Profile_selected.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              label: 'Profile',
+                            ),
+                          ],
                         ),
-                        label: 'Search',
                       ),
-                      NavigationDestination(
-                        icon: SvgPicture.asset(
-                          'assets/Bookmark.svg',
-                          colorFilter: ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        selectedIcon: SvgPicture.asset(
-                          'assets/Bookmark.svg',
-                          colorFilter: ColorFilter.mode(
-                            kIconsColor,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        label: 'Favourites',
-                      ),
-                      NavigationDestination(
-                        icon: SvgPicture.asset(
-                          'assets/Profile.svg',
-                          colorFilter: ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        selectedIcon: SvgPicture.asset(
-                          'assets/Profile_selected.svg',
-                          colorFilter: ColorFilter.mode(
-                            kIconsColor,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        label: 'Profile',
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
+
+          // Positioned(
+          //   bottom: 8,
+          //   left: 6,
+          //   right: 6,
+          //   child: SafeArea(
+          //     child: Padding(
+          //       padding: const EdgeInsets.symmetric(horizontal: 16),
+          //       child: ClipRRect(
+          //         borderRadius: BorderRadius.circular(50),
+          //         child: NavigationBar(
+          //           labelPadding: const EdgeInsets.all(0),
+
+          //           height: 56, // => windows
+          //           labelBehavior:
+          //               NavigationDestinationLabelBehavior.alwaysHide,
+          //           animationDuration: Duration(milliseconds: 400),
+          //           // indicatorColor: Colors.white.withAlpha(23),
+          //           indicatorColor: const Color.fromARGB(255, 32, 42, 56),
+          //           backgroundColor: const Color.fromARGB(255, 36, 52, 73),
+          //           onDestinationSelected: (index) {
+          //             setState(() {
+          //               currentIndex = index;
+          //             });
+          //           },
+          //           selectedIndex: currentIndex,
+          //           destinations: [
+          //             NavigationDestination(
+          //               // icon: Icon(Icons.home_outlined , ),
+          //               icon: SvgPicture.asset(
+          //                 'assets/Home.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   Colors.white,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               selectedIcon: SvgPicture.asset(
+          //                 'assets/home_selected.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   kIconsColor,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               label: 'Home',
+          //             ),
+          //             NavigationDestination(
+          //               icon: SvgPicture.asset(
+          //                 'assets/Search.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   Colors.white,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               selectedIcon: SvgPicture.asset(
+          //                 'assets/Search.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   kIconsColor,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               label: 'Search',
+          //             ),
+          //             NavigationDestination(
+          //               icon: SvgPicture.asset(
+          //                 'assets/Bookmark.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   Colors.white,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               selectedIcon: SvgPicture.asset(
+          //                 'assets/Bookmark.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   kIconsColor,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               label: 'Favourites',
+          //             ),
+          //             NavigationDestination(
+          //               icon: SvgPicture.asset(
+          //                 'assets/Profile.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   Colors.white,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               selectedIcon: SvgPicture.asset(
+          //                 'assets/Profile_selected.svg',
+          //                 colorFilter: ColorFilter.mode(
+          //                   kIconsColor,
+          //                   BlendMode.srcIn,
+          //                 ),
+          //               ),
+          //               label: 'Profile',
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

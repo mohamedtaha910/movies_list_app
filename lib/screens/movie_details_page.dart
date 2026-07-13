@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/components/cast_view.dart';
 import 'package:movies_app/components/details_row.dart';
+import 'package:movies_app/components/expandable_text.dart';
 import 'package:movies_app/components/horizintal_line.dart';
 import 'package:movies_app/components/movie_item.dart';
 import 'package:movies_app/components/no_connection_body.dart';
@@ -49,6 +50,7 @@ class _MovieDetailsState extends State<MovieDetails> {
           if (snapshot.hasData) {
             movie = snapshot.data!;
             return SafeArea(
+              top: false,
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
@@ -62,49 +64,45 @@ class _MovieDetailsState extends State<MovieDetails> {
                       children: [
                         movie.backdropPath.isEmpty
                             ? ClipRRect(
-                                borderRadius: BorderRadiusGeometry.circular(6),
+                                borderRadius: BorderRadiusGeometry.circular(0),
                                 child: Image.asset('assets/backdrop.png'),
                               )
                             : ClipRRect(
                                 borderRadius: BorderRadiusGeometry.circular(0),
                                 child: Image.network(
                                   'https://image.tmdb.org/t/p/w500${movie.backdropPath}',
-                                  // height: 250,
+                                  height: 240,
                                   // width: double.infinity,
-                                  // fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 ),
                               ),
 
-                        Positioned(
+                        Positioned.fill(
                           // top: 100,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          height: 90,
+                          // bottom: 0,
+                          // left: 0,
+                          // right: 0,
+                          // height: 90,
                           child: Container(
                             decoration: BoxDecoration(
                               // borderRadius: BorderRadius.circular(6),
                               gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.center,
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
                                 colors: [
-                                  // Colors.red,
-                                  // Colors.black,
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  kPrimaryColor.withAlpha(120),
                                   kPrimaryColor,
-                                  // kPrimaryColor.withAlpha(50),
-                                  kPrimaryColor.withAlpha(0),
-                                  // kPrimaryColor,
-                                  // Colors.transparent,
-                                  // Colors.transparent,
-
-                                  // Colors.yellow
                                 ],
+                                stops: const [0.0, 0.45, 0.8, 1.0],
                               ),
                             ),
                           ),
                         ),
                         Positioned(
-                          top: 28,
+                          // top: 28,
+                          top: 38,
                           left: 16,
                           child: GestureDetector(
                             onTap: () {
@@ -113,23 +111,39 @@ class _MovieDetailsState extends State<MovieDetails> {
                             child: Container(
                               padding: EdgeInsets.all(1),
                               decoration: BoxDecoration(
-                                color: Colors.black.withAlpha(180),
+                                // color: Colors.black.withAlpha(180),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    // Colors.black.withAlpha(240),
+                                    // Colors.black.withAlpha(190),
+                                    // Colors.black.withAlpha(120),
+                                    kPrimaryColor.withAlpha(255),
+                                    kPrimaryColor.withAlpha(200),
+                                    // kPrimaryColor.withAlpha(150),
+                                  ],
+                                  begin: AlignmentGeometry.topCenter,
+                                  end: AlignmentGeometry.bottomCenter,
+                                ),
                                 borderRadius: BorderRadius.circular(50),
-                                border: Border.all(
-                                  color: Colors.grey.withAlpha(25),
-                                  width: 0.8,
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Colors.white.withAlpha(50),
+                                    width: 1,
+                                  ),
                                 ),
                               ),
                               child: Icon(
                                 Icons.chevron_left_rounded,
                                 size: 32,
                                 color: kTextColor,
+                                // color: Colors.white,
                               ),
                             ),
                           ),
                         ),
                         Positioned(
-                          top: 28,
+                          // top: 28,
+                          top: 38,
                           right: 16,
                           child: GestureDetector(
                             onTap: () {
@@ -145,10 +159,25 @@ class _MovieDetailsState extends State<MovieDetails> {
                             child: Container(
                               padding: EdgeInsets.all(6),
                               decoration: BoxDecoration(
-                                color: Colors.black.withAlpha(200),
+                                // color: Colors.black.withAlpha(200),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    // Colors.black.withAlpha(240),
+                                    // Colors.black.withAlpha(190),
+                                    // Colors.black.withAlpha(120),
+                                    kPrimaryColor.withAlpha(255),
+                                    kPrimaryColor.withAlpha(200),
+                                    // kPrimaryColor.withAlpha(120),
+                                  ],
+                                  begin: AlignmentGeometry.topCenter,
+                                  end: AlignmentGeometry.bottomCenter,
+                                ),
                                 borderRadius: BorderRadius.circular(50),
-                                border: Border.all(
-                                  color: Colors.grey.withAlpha(25),
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Colors.white.withAlpha(50),
+                                    width: 1,
+                                  ),
                                 ),
                               ),
                               child: FavouritesService().isFavourite(widget.id)
@@ -196,11 +225,22 @@ class _MovieDetailsState extends State<MovieDetails> {
                                     vertical: 2,
                                   ),
                                   decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.orangeAccent.withAlpha(50),
+                                        Colors.orangeAccent.withAlpha(20),
+                                      ],
+                                      begin: AlignmentGeometry.topCenter,
+                                      end: AlignmentGeometry.bottomCenter,
+                                    ),
                                     borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orangeAccent.withAlpha(25),
-                                    border: Border.all(
-                                      color: Colors.orangeAccent.withAlpha(25),
-                                      width: 0.8,
+                                    border: Border(
+                                      top: BorderSide(
+                                        color: Colors.orangeAccent.withAlpha(
+                                          50,
+                                        ),
+                                        width: 0.7,
+                                      ),
                                     ),
                                     // color: kTextColor.withAlpha(60),
                                   ),
@@ -293,13 +333,45 @@ class _MovieDetailsState extends State<MovieDetails> {
                       ),
                     ),
                     SizedBox(height: 18),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Text(
-                        movie.overview.isEmpty ? 'No overview' : movie.overview,
-                        style: TextStyle(fontSize: 14, color: kTextColor),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    //   child: Text(
+                    //     movie.overview.isEmpty ? 'No overview' : movie.overview,
+                    //     style: TextStyle(fontSize: 14, color: kTextColor),
+                    //   ),
+                    // ),
+                    movie.overview.isEmpty
+                        ? const Text(
+                            "No Overview.",
+                            style: TextStyle(
+                              color: kTextColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                            ),
+                          )
+                        : movie.overview.length < 100
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                            ),
+                            child: Text(
+                              movie.overview,
+                              style: TextStyle(
+                                color: kTextColor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                            ),
+                            child: ExpandableText(
+                              text: movie.overview,
+                              trimLines: 4,
+                            ),
+                          ),
                     SizedBox(height: 18),
                     HorizintalLine(),
                     SizedBox(height: 18),

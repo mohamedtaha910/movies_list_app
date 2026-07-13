@@ -66,26 +66,13 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
           final actor = snapshot.data!;
 
           return SafeArea(
+            top: false,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     horizontal: 8.0,
-                  //     vertical: 5.0,
-                  //   ),
-                  //   child: IconButton(
-                  //     padding: EdgeInsets.zero,
-                  //     onPressed: () {
-                  //       Navigator.of(context).pop();
-                  //     },
-                  //     icon: Icon(Icons.arrow_back_ios_new, color: kTextColor),
-                  //   ),
-                  // ),
-                  // SizedBox(height: 23,),
                   Padding(
                     padding: const EdgeInsets.all(0.0),
                     child: Stack(
@@ -93,7 +80,11 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                         ClipRRect(
                           // borderRadius: BorderRadiusGeometry.circular(14),
                           child: actor.profilePath == ''
-                              ? Image.asset('assets/person.jpg')
+                              ? Image.asset(
+                                  'assets/person.jpg',
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
                               : Image.network(
                                   'https://image.tmdb.org/t/p/w500${actor.profilePath}',
                                   // height: 500,
@@ -174,25 +165,43 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                           ),
                         ),
                         Positioned(
-                          top: 20,
+                          // top: 20,
+                          top: 36,
                           left: 16,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).pop();
                             },
                             child: Container(
-                              padding: EdgeInsets.all(3),
+                              padding: EdgeInsets.all(2),
                               decoration: BoxDecoration(
-                                color: Colors.black.withAlpha(100),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    // Colors.black.withAlpha(250),
+                                    // Colors.black.withAlpha(200),
+                                    // Colors.black.withAlpha(120),
+                                    Colors.blueGrey.withAlpha(250),
+                                    Colors.blueGrey.withAlpha(180),
+                                    Colors.blueGrey.withAlpha(120),
+
+                                    // kPrimaryColor.withAlpha(255),
+                                    // kPrimaryColor.withAlpha(200),
+                                    // kPrimaryColor.withAlpha(120),
+                                  ],
+                                  begin: AlignmentGeometry.topCenter,
+                                  end: AlignmentGeometry.bottomCenter,
+                                ),
                                 borderRadius: BorderRadius.circular(50),
-                                border: Border.all(
-                                  color: Colors.white.withAlpha(25),
-                                  width: 1,
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Colors.white.withAlpha(100),
+                                    width: 0.8,
+                                  ),
                                 ),
                               ),
                               child: Icon(
                                 Icons.chevron_left_rounded,
-                                size: 28,
+                                size: 32,
                                 color: Colors.white,
                               ),
                             ),
