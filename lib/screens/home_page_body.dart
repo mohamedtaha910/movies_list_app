@@ -18,7 +18,7 @@ class HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70,
+        toolbarHeight: 60,
         // automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
         surfaceTintColor: Colors.transparent,
@@ -90,7 +90,7 @@ class HomePageBody extends StatelessWidget {
               padding: const EdgeInsets.only(
                 right: 8.0,
                 left: 8.0,
-                top: 8.0,
+                top: 2.0,
                 // bottom: 16.0,
               ),
               child: SingleChildScrollView(

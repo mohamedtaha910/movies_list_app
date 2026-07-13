@@ -55,15 +55,34 @@ lib/
 
 ## 📸 Screenshots
 
-![Home](assets/screenshots/home_page.png)
-![Search](assets/screenshots/discover_page.png)
-![Details](assets/screenshots/movie_details.png)
-![Details2](assets/screenshots/movie_details2.png)
-![Details3](assets/screenshots/movie_details3.png)
-![Details4](assets/screenshots/movie_details4.png)
-![Favorites](assets/screenshots/Favourite_page.png)
-![Actor Profile](assets/screenshots/actor_profile.png)
-![Actor Profile2](assets/screenshots/actor_profile2.png)
+| Splash                                                 | Home                                                      |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![Splash](assets/screenshots/splash.jpg)               | ![Home](assets/screenshots/home.jpg)                      |
+
+| discover                                               | search                                                    |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![discover](assets/screenshots/discover.jpg)           | ![search](assets/screenshots/search.jpg)                  |
+
+| favourite                                              | favourite(2)                                              |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![favourite](assets/screenshots/favourite.jpg)         | ![favourite ](assets/screenshots/favourite2.jpg)          |
+
+| profile                                                | movie details                                             |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![profile](assets/screenshots/profile.jpg)             | ![details ](assets/screenshots/movie_details.jpg)         |
+
+| movie details (2)                                      | actor                                                     |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![details](assets/screenshots/movie_details2.jpg)      | ![actor ](assets/screenshots/actor.jpg)                   |
+
+| actor (2)                                              | favourite(3)                                              |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![actor](assets/screenshots/actor2.jpg)                | ![favourite ](assets/screenshots/favourite3.jpg)          |
+
+| favourite(4)                                           | category                                                  |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| ![favourite](assets/screenshots/favourite4.jpg)        | ![category ](assets/screenshots/category.jpg)             |
+
 
 ---
 
